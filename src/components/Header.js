@@ -58,7 +58,6 @@ const Header = () => {
                             <MenuItem value={'EUR'}>EUR</MenuItem>
                         </Select>
                         
-                        <Button color="inherit">Login</Button>
                     </Toolbar>
                 </Container>
             </AppBar>
