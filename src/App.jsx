@@ -13,7 +13,7 @@ function App() {
   // material UI
   const useStyles = makeStyles(() => ({
    App: {
-     backgroundColor: "#14161a",
+     backgroundColor: "#0B0C10",
      color: "white",
      minHeight: '100vh'
    }
