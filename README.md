@@ -1,10 +1,5 @@
-# Getting Started with Create React App
+### This is a crypto web page that is not ready yet
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
 
 ### `npm start`
 
