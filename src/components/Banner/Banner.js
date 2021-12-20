@@ -5,7 +5,7 @@ import Carousel from "./Carousel";
 
 const useStyles=makeStyles(()=> ({
     banner: {
-        backgroundImage: "url(./banner1.jpg)",
+        backgroundImage: "url(./banner3.jpg)",
     },
 
     bannerContent: {
@@ -38,7 +38,7 @@ const Banner = () => {
                     fontFamily: "Montserrat",
                     }}
                 >
-                    Information on your favourite crypto
+                    {/* Information on your favourite crypto */}
                 </Typography>
                 </div>
                 <Carousel/>

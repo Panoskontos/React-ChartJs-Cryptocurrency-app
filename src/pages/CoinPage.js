@@ -17,7 +17,7 @@ const CoinPage = () => {
     const [coin, setCoin] = useState();
 
     const { currency } = "EUR"
-    const { symbol } = "€"
+    const  symbol  = "€"
 
     // get coin
     const fetchCoin = async () => {
@@ -31,7 +31,6 @@ const CoinPage = () => {
         fetchCoin();
     }, [])
     // -----------------------
-    console.log(coin)
 
     
   const useStyles = makeStyles((theme) => ({
@@ -96,7 +95,7 @@ const CoinPage = () => {
           <Typography variant="h3" className={classes.heading}>
           {coin?.name}
             </Typography>
-        </div>
+        
 
 
         <div className={classes.marketData}>
@@ -128,7 +127,7 @@ const CoinPage = () => {
               }}
             >
               {symbol}{" "}
-              {coin?.market_data.current_price["eur"]} €
+              {coin?.market_data.current_price["eur"]} 
             </Typography>
           </span>
           
@@ -154,7 +153,7 @@ const CoinPage = () => {
           </span>
           
         </div>
-
+        </div>
             {/* chart */}
         <CoinInfo coin={coin} />
     </div>
