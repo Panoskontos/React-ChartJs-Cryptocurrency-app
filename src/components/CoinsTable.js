@@ -21,9 +21,10 @@ import { CoinList } from "../config/api";
 import { useNavigate } from "react-router-dom";
 import { CryptoState } from "../CryptoContext";
 
-// export function numberWithCommas(x) {
-//     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-//   }
+
+export function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
 
 
 
@@ -41,9 +42,11 @@ const CoinsTable = () => {
 
 
     const [coins, setCoins] = useState([]);
-        const [loading, setLoading] = useState(false);
+    
+    const [loading, setLoading] = useState(false);
     // search functionality
-    const [search, setSearch ] = useState()
+     const [search, setSearch ] = useState("")
+     const [page, setPage] = useState(1);
 
     const fetchCoins = async () => {
         setLoading(true);
@@ -80,16 +83,16 @@ const CoinsTable = () => {
 
     const useStyles = makeStyles({
         row: {
-          backgroundColor: "#16171a",
+          backgroundColor: "#0B0C10",
           cursor: "pointer",
           "&:hover": {
-            backgroundColor: "#131111",
+            backgroundColor: "#1F2833",
           },
           fontFamily: "Montserrat",
         },
         pagination: {
           "& .MuiPaginationItem-root": {
-            color: "gold",
+            color: "#45A29E",
           },
         },
       });
@@ -117,10 +120,10 @@ const CoinsTable = () => {
                     { 
                         // have loading feature
                         loading ? (
-                            <LinearProgress style={{ backgroundColor: "gold"}} />
+                            <LinearProgress style={{ backgroundColor: "#66FCF1"}} />
                         ) : (
                             <Table aria-label="simple table">
-                                <TableHead style={{ backgroundColor: "#EEBC1D"}}>      
+                                <TableHead style={{ backgroundColor: "#45A29E"}}>      
                                      <TableRow>
                                          {["Coin", "Price", "24h Change", "Market Cap"].map((head) => (
                                              <TableCell
@@ -139,7 +142,7 @@ const CoinsTable = () => {
                                 </TableHead>
 
                                 <TableBody>
-                                    {handleSearch().map((row) => {
+                                    {handleSearch().slice((page - 1) * 10, (page - 1) * 10 + 10).map((row) => {
                                         const profit = row.price_change_percentage_24h > 0;
 
                                         return (
@@ -180,12 +183,15 @@ const CoinsTable = () => {
                                                         </span>
                                                     </div>
                                                     
-                                                    {/*  
+                                                      
                                                     </TableCell>
+                                                    
                                                     <TableCell align="right">
                                                     {symbol}{" "}
                                                     {numberWithCommas(row.current_price.toFixed(2))}
+                                                    
                                                     </TableCell>
+                                                     
                                                     <TableCell
                                                     align="right"
                                                     style={{
@@ -193,27 +199,46 @@ const CoinsTable = () => {
                                                         fontWeight: 500,
                                                     }}
                                                     >
+                                                       
                                                     {profit && "+"}
-                                                    {row.price_change_percentage_24h.toFixed(2)}%
+                                                     
+                                                    {row.price_change_percentage_24h?.toFixed(2)}%
+                                                    
                                                     </TableCell>
+                                                    
                                                     <TableCell align="right">
                                                     {symbol}{" "}
                                                     {numberWithCommas(
-                                                        row.market_cap.toString().slice(0, -6)
+                                                        row.market_cap.toString().slice(0, 12)
                                                     )}
-                                                    M
-                                                    */}
-                                                    </TableCell>
-                                                        
+                                                     
+                                                     
+                                                    </TableCell>   
 
                                             </TableRow>
                                         )
-                                    })}
+                                                    })}
                                 </TableBody>
 
                             </Table>
                         )}
                 </TableContainer> 
+
+                <Pagination
+                count={(handleSearch()?.length / 10).toFixed(0)}
+                style={{
+                    padding: 20,
+                    width: "100%",
+                    display: "flex",
+                    justifyContent: "center",
+                }}
+                classes={{ ul: classes.pagination }}
+                onChange={(_, value) => {
+                    setPage(value);
+                    window.scroll(0, 450);
+                }}
+                />
+
              </Container>
             </ThemeProvider>
     ) 
