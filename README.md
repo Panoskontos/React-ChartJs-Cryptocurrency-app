@@ -9,7 +9,8 @@
 
 <br>
 
-![Crypto-api](https://user-images.githubusercontent.com/65974766/147004482-f430f72e-f1e1-45bc-bfa5-10dce24e2dc2.jpg)
+![panos_crypto](https://user-images.githubusercontent.com/65974766/147004601-3b275e15-a3f5-4b77-b7fc-737132f50f9e.jpg)
+
 
 <br>
 
