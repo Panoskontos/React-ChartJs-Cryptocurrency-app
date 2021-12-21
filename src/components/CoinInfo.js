@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { HistoricalChart } from "../config/api";
-
+import "./CoinInfo.css";
 import {
   CircularProgress,
   createTheme,
@@ -41,7 +41,7 @@ export const options = {
       radius: 1,
     },
   },
-  layout: {padding:{bottom:25, left:25}},
+  layout: {padding:{bottom:15, left:15}},
   responsive: true,
   scales: {
     y: {
@@ -112,6 +112,7 @@ const CoinInfo = ({ coin }) => {
         marginTop: 0,
         padding: 20,
         paddingTop: 0,
+        
       },
     },
   }));
@@ -156,8 +157,9 @@ const CoinInfo = ({ coin }) => {
   return (
       <ThemeProvider theme={darktheme}>
           
-          <div className={classes.container}>
+          <div id="bigdiv" className={classes.container}>
               <Line 
+              id="mychart"
               options={options}
               data = {data}
               />
@@ -171,6 +173,7 @@ const CoinInfo = ({ coin }) => {
             >
               {chartDays.map((day) => (
                 <SelectButton
+                  className="daybutton"
                   key={day.value}
                   onClick={() => setDays(day.value)}
                   selected={day.value === days}

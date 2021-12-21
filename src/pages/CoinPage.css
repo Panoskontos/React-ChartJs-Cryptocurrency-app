@@ -1,0 +1,14 @@
+@media screen and (max-width: 800px) {
+  .myimage {
+    width: 100px;
+    height: 100px;
+  }
+
+  #head1 {
+    font-size: 2rem;
+  }
+
+  #sub {
+    font-size: large;
+  }
+}

@@ -4,6 +4,8 @@ import axios from "axios";
 import CoinInfo from "../components/CoinInfo";
 import { SingleCoin } from "../config/api";
 import { LinearProgress, makeStyles, Typography } from "@material-ui/core";
+import './CoinPage.css';
+
 
 export function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -84,14 +86,16 @@ const CoinPage = () => {
 
     return (
         <div className={classes.container}>
+
             <div className={classes.sidebar}>
                 <img
+                className={"myimage"}
           src={coin?.image.large}
           alt={coin?.name}
           height="200"
           style={{ marginBottom: 20 }}
           />
-          <Typography variant="h3" className={classes.heading}>
+          <Typography id="head1" variant="h3" className={classes.heading}>
           {coin?.name}
             </Typography>
         
@@ -100,11 +104,12 @@ const CoinPage = () => {
         <div className={classes.marketData}>
             
             <span style={{ display: "flex" }}>
-            <Typography variant="h5" className={classes.heading}>
+            <Typography id="sub" variant="h5" className={classes.heading}>
               Rank:
             </Typography>
             &nbsp; &nbsp;
             <Typography
+            id="sub"
               variant="h5"
               style={{
                 fontFamily: "Montserrat",
@@ -115,11 +120,12 @@ const CoinPage = () => {
           </span>
             
           <span style={{ display: "flex" }}>
-            <Typography variant="h5" className={classes.heading}>
+            <Typography id="sub" variant="h5" className={classes.heading}>
               Current Price:
             </Typography>
             &nbsp; &nbsp;
             <Typography
+            id="sub"
               variant="h5"
               style={{
                 fontFamily: "Montserrat",
@@ -131,11 +137,12 @@ const CoinPage = () => {
           </span>
           
           <span style={{ display: "flex" }}>
-            <Typography variant="h5" className={classes.heading}>
+            <Typography id="sub" variant="h5" className={classes.heading}>
               Market Cap:
             </Typography>
             &nbsp; &nbsp;
             <Typography
+            id="sub"
               variant="h5"
               style={{
                 fontFamily: "Montserrat",

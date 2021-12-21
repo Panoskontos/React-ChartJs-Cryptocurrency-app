@@ -54,7 +54,7 @@ const Header = () => {
                         >
                             
 
-                            <MenuItem value={'USD'}>USD</MenuItem>
+                            {/* <MenuItem value={'USD'}>USD</MenuItem> */}
                             <MenuItem value={'EUR'}>EUR</MenuItem>
                         </Select>
                         
