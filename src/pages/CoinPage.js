@@ -5,7 +5,6 @@ import CoinInfo from "../components/CoinInfo";
 import { SingleCoin } from "../config/api";
 import { LinearProgress, makeStyles, Typography } from "@material-ui/core";
 
-
 export function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
@@ -154,8 +153,10 @@ const CoinPage = () => {
           
         </div>
         </div>
-            {/* chart */}
+           
         <CoinInfo coin={coin} />
+          
+        {/* test */}
     </div>
     )
 }

@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { HistoricalChart } from "../config/api";
-// import { Line } from "react-chartjs-2";
-import { Chart ,LineElement } from 'chart.js'
+
 import {
   CircularProgress,
   createTheme,
@@ -11,27 +10,91 @@ import {
 } from "@material-ui/core";
 import SelectButton from "./SelectButton";
 import { chartDays } from "../config/data";
+// test chart js
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 
-Chart.register(LineElement)
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+
+
+export const options = {
+  elements: {
+    point: {
+      radius: 1,
+    },
+  },
+  layout: {padding:{bottom:25, left:25}},
+  responsive: true,
+  scales: {
+    y: {
+        ticks: {
+          color:"white",
+          font: {
+            size: 12
+          }
+        }
+      },
+    
+    x: {
+        ticks: {
+          color:"white",
+          font: {
+            size: 12
+          }
+        }
+      }
+  },
+  plugins: {
+    legend: { display:false,
+    },
+    title: {
+      display: true,
+      text: 'Price',
+    },
+  },
+};
+
+
+
+// ------------------------
 
 const CoinInfo = ({ coin }) => {
 
     // api data
-  const [hdata, sethdata] = useState();
+  const [historicData, setHistoricData] = useState([]);
   const [days, setDays] = useState(1);
   const currency  = "eur"
   const fetchHistoricData = async () => {
     const { data } = await axios.get(HistoricalChart(coin.id, days, currency));
 
-    sethdata(data.prices);
+    setHistoricData(data.prices);
   };
 
-  console.log(coin);
-  console.log(hdata);
-
+ 
   useEffect(() => {
     fetchHistoricData();
   }, [days]);
+
+  console.log(coin);
+  console.log(historicData);
 
   // Editing 
 
@@ -67,16 +130,55 @@ const CoinInfo = ({ coin }) => {
 //   our jsx
 
 
+ const data = {
+  labels: historicData.map((coin) => {
+    let date = new Date(coin[0]);
+    let time = date.getHours() > 12
+        ? `${date.getHours() - 12}:${date.getMinutes()} PM`
+        : `${date.getHours()}:${date.getMinutes()} AM`;
+    return days === 1 ? time : date.toLocaleDateString();
+  }),
+
+  datasets: [
+    {
+      label: `Price ( Past ${days} Days ) in ${currency}`,
+      data: historicData.map((coin) => coin[1]),
+          borderColor: '#66fcf1',
+      backgroundColor: '#66fcf1',
+      fill:false,
+    }
+  ],
+ };
+
+
+
 
   return (
       <ThemeProvider theme={darktheme}>
           
           <div className={classes.container}>
-            {!hdata ?( <CircularProgress style={{color:"#45A29E"}} size={250} />) : 
-            (
-            <div> Chart </div>
-            )
-            }
+              <Line 
+              options={options}
+              data = {data}
+              />
+              <div
+              style={{
+                display: "flex",
+                marginTop: 20,
+                justifyContent: "space-around",
+                width: "100%",
+              }}
+            >
+              {chartDays.map((day) => (
+                <SelectButton
+                  key={day.value}
+                  onClick={() => setDays(day.value)}
+                  selected={day.value === days}
+                >
+                  {day.label}
+                </SelectButton>
+              ))}
+            </div>
         </div>
       </ThemeProvider>
       
