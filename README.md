@@ -2,9 +2,7 @@
 
 ### Stay up to date with crypto and never miss a change in prices
 
-<br>
-
-## You can find the page in this link https://react-panos-cryptocurrency-app.hostman.site/
+#### You can find the page in this link https://react-panos-cryptocurrency-app.hostman.site/
 
 
 <br>
